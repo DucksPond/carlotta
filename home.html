@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/webp" href="https://cdn-icons-png.flaticon.com/512/10366/10366416.png">
+    <title>Carlotta's website</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(90deg, pink, hotpink, pink);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            font-family: 'Dancing Script', cursive;
+            color: white;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        h1 {
+            font-size: 48px;
+            text-align: center;
+            display: none; /* Hide the header initially */
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            display: none; /* Hide the main screen initially */
+        }
+
+        .button {
+            background: hotpink;
+            border: none;
+            cursor: pointer;
+            font-size: 48px; /* Increased button size */
+            margin: 0 20px; /* Increased margin */
+            width: 80px; /* Make buttons circular */
+            height: 80px; /* Make buttons circular */
+            border-radius: 50%; /* Make buttons circular */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .button:hover {
+            transform: scale(1.1);
+        }
+
+        .intro-container {
+            background: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .intro-gif {
+            width: 50%;
+        }
+
+        .loading-text {
+            font-family: 'Sans', sans-serif;
+            color: pink;
+            font-weight: bold;
+            font-size: 24px;
+            margin-top: 20px;
+        }
+
+        .hello-kitty {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            display: none; /* Hide initially */
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; background-color: white; }
+            to { opacity: 0; background-color: pink; }
+        }
+
+        .settings-container {
+            display: none; /* Hide settings container initially */
+            position: absolute;
+            top: 50px;
+            width: 80%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .settings-box {
+            width: 30%;
+            height: 200px;
+            background: grey;
+            animation: pulse 1s infinite;
+            border: 2px solid lightgrey;
+            display: none; /* Hide settings boxes initially */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes pulse {
+            0% { background-color: grey; }
+            50% { background-color: lightgrey; }
+            100% { background-color: grey; }
+        }
+
+        .slider {
+            width: 80%;
+        }
+
+        .credits-button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: grey;
+            border: none;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .credits-button:hover::after {
+            content: 'Credits';
+            position: absolute;
+            top: -30px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="intro-container" id="intro-container">
+        <img src="https://i.pinimg.com/originals/c3/34/da/c334dac30bc8717cd03460eedda1f0f0.gif" alt="Intro GIF" class="intro-gif">
+        <div class="loading-text">Loading... This may take a while...</div>
+    </div>
+
+    <h1>Corlotta's Website</h1>
+    <div class="button-container">
+        <button class="button" onclick="location.href='all.html'">🎮</button>
+        <button class="button" onclick="location.href='mukbang.html'">🍔</button>
+        <button class="button" onclick="toggleSettings()">⚙️</button>
+    </div>
+
+    <div class="settings-container" id="settings-container">
+        <div class="settings-box">
+            <input type="range" min="0" max="360" value="0" class="slider" id="hue-slider">
+        </div>
+        <div class="settings-box">
+            <label for="google-tab-cloak">Turn on Google Tab Cloak</label>
+            <input type="checkbox" id="google-tab-cloak">
+        </div>
+        <div class="settings-box">
+            <button class="credits-button" onclick="location.href='credits.html'">🕴️</button>
+        </div>
+    </div>
+
+    <script>
+        const introContainer = document.getElementById('intro-container');
+        const mainContent = document.querySelector('.button-container');
+        const header = document.querySelector('h1');
+        const introGif = document.querySelector('.intro-gif');
+        const settingsContainer = document.getElementById('settings-container');
+        const settingsBoxes = document.querySelectorAll('.settings-box');
+
+        // Generate a random duration between 5-10 seconds
+        const randomDuration = Math.floor(Math.random() * 6000) + 5000;
+
+        setTimeout(() => {
+            introContainer.style.animation = 'fadeOut 1s forwards';
+            setTimeout(() => {
+                introContainer.style.display = 'none';
+                mainContent.style.display = 'flex';
+                header.style.display = 'block';
+
+                // Generate a random number of Hello Kitty logos (between 5-10)
+                const numberOfLogos = Math.floor(Math.random() * 6) + 5;
+
+                for (let i = 0; i < numberOfLogos; i++) {
+                    const logo = document.createElement('img');
+                    logo.src = 'https://pnghq.com/wp-content/uploads/pnghq.com-hello-kitty-logo-png-tran-7.png';
+                    logo.className = 'hello-kitty';
+                    logo.style.top = Math.random() * 100 + 'vh';
+                    logo.style.left = Math.random() * 100 + 'vw';
+                    logo.style.display = 'block'; // Show logos after animation ends
+
+                    logo.addEventListener('click', () => {
+                        logo.style.transition = 'opacity 1s';
+                        logo.style.opacity = 0;
+
+                        setTimeout(() => {
+                            logo.style.top = Math.random() * 100 + 'vh';
+                            logo.style.left = Math.random() * 100 + 'vw';
+                            logo.style.opacity = 1;
+                        }, 1000); // Match the fade out transition duration
+                    });
+
+                    document.body.appendChild(logo);
+                }
+
+            }, 1000); // Match the fadeOut animation duration
+
+        }, randomDuration);
+
+        function toggleSettings() {
+            const isSettingsVisible = settingsContainer.style.display === 'flex';
+            settingsContainer.style.display = isSettingsVisible ? 'none' : 'flex';
+
+            settingsBoxes.forEach(box => {
+                box.style.display = isSettingsVisible ? 'none' : 'flex';
+            });
+        }
+
+        // Hue slider event
+        const hueSlider = document.getElementById('hue-slider');
+        hueSlider.addEventListener('input', (event) => {
+            document.body.style.filter = `hue-rotate(${event.target.value}deg)`;
+        });
+
+        // Google Tab Cloak checkbox event
+        const googleTabCloak = document.getElementById('google-tab-cloak');
+        googleTabCloak.addEventListener('change', (event) => {
+            if (event.target.checked) {
+                document.title = 'Google';
+                document.querySelector("link[rel='icon']").href = 'https://www.google.com/favicon.ico';
+            } else {
+                document.title = "My Girlfriend's Tetris Website";
+                document.querySelector("link[rel='icon']").href = 'https://i.pinimg.com/originals/33/95/06/339506e7f24dfe8a71da85e7de7961fc.png';
+            }
+        });
+    </script>
+</body>
+</html>
