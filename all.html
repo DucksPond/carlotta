@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(120deg, pink, hotpink);
+            animation: sway 10s infinite linear;
+        }
+
+        @keyframes sway {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        h1 {
+            color: lightgrey;
+            font-size: 3rem;
+            margin: 0;
+        }
+
+        .games-container {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 20px;
+        }
+
+        .game-square {
+            width: 200px;
+            height: 200px;
+            background-color: white;
+            border: 2px solid lightgrey;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .game-square:hover {
+            transform: scale(1.1);
+        }
+
+        .game-link {
+            text-decoration: none;
+            color: black;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>Games</h1>
+    <div class="games-container">
+        <a href="papa.html" class="game-square">
+            <img src="https://i.ytimg.com/vi/5e8rA9vL3Xc/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBDVZR1NELf2QgHs3m8hgatv1eGAQ" alt="Papas Games" class="game-link">
+        </a>
+        <a href="run3.html" class="game-square">
+            <img src="https://e.snmc.io/lk/lv/x/a38e8c4d9fc64a3d862e5f6858ecfec4/10934781" alt="Run 3" class="game-link">
+        </a>
+        <a href="cook.html" class="game-square">
+            <img src="https://d30fyg9bwlgx48.cloudfront.net/wp-content/uploads/2022/12/game-list-img-CF-644x800__ScaleWidthWzMyMl0.jpg" alt="Cooking Fever" class="game-link">
+        </a>
+        <a href="mukbang.html" class="game-square">
+            <img src="https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg" alt="Mukbang" class="game-link">
+        </a>
+    </div>
+</body>
+</html>
