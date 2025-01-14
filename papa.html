@@ -14,7 +14,17 @@
             background-color: black;
             color: white;
         }
+        
+        .home-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 2rem;
+            text-decoration: none;
+            color: white;
 
+      }
+            
         .container {
             display: flex;
             justify-content: center;
@@ -60,6 +70,7 @@
     </style>
 </head>
 <body>
+    <a href="all.html" class="home-button">🏠</a> 
     <div class="container">
         <div class="arrow left" onclick="prevGame()">&#10094;</div>
         <div class="game-square" id="gameSquare" onclick="goToGame()">
