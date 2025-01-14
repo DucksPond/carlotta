@@ -9,91 +9,110 @@
             margin: 0;
             height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(120deg, #ffcccb, #ff7f50);
-            animation: sway 10s infinite linear;
-        }
-
-        @keyframes sway {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
-        }
-
-        h1 {
+            background-color: black;
             color: white;
-            font-size: 3rem;
-            margin: 20px 0;
         }
 
-        .games-container {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            width: 80%;
-            max-width: 1200px;
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            width: 100%;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .arrow.left {
+            left: 20px;
+        }
+
+        .arrow.right {
+            right: 20px;
         }
 
         .game-square {
-            width: 100%;
-            padding-top: 100%;
-            position: relative;
+            width: 200px;
+            height: 200px;
             background-color: white;
-            border: 2px solid lightgrey;
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
-            overflow: hidden;
-            transition: transform 0.3s;
+            border: 2px solid lightgrey;
+            cursor: pointer;
         }
 
-        .game-square:hover .game-info {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .game-info {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            opacity: 0;
-            padding: 10px;
-            transition: opacity 0.3s, transform 0.3s;
-            transform: translateY(100%);
-        }
-
-        .game-link {
-            text-decoration: none;
-            color: black;
-            font-size: 1.2rem;
-        }
-
-        img {
+        .game-square img {
             max-width: 100%;
             max-height: 100%;
         }
     </style>
 </head>
 <body>
-    <h1>Papa's Games</h1>
-    <div class="games-container">
-        <!-- Repeat this block for each game -->
-        <a href="papas-bakeria.html" class="game-square">
-            <img src="https://loser.co.is.goated.df.cissp.or.id/semag/papasbakeria/papasbakeria.png" alt="Papas Bakeria">
-            <div class="Papas Bakeria">Game 1</div>
-        </a>
-        <a href="papas-burgeria.html" class="game-square">
-            <img src="https://loser.co.is.goated.df.cissp.or.id/semag/papasbakeria/papasburgeria.png" alt="Papas Burgeria">
-            <div class="Papas Burgeria">Game 2</div>
-       </a>
-       <a href="papas-cheeseria.html" class="game-square">
-            <img src="https://loser.co.is.goated.df.cissp.or.id/semag/papasbakeria/papascheeseria.png" alt="Papas Cheeseria">
-            <div class="Papas Cheeseria">Game 3</div>
+    <div class="container">
+        <div class="arrow left" onclick="prevGame()">&#10094;</div>
+        <div class="game-square" id="gameSquare" onclick="goToGame()">
+            <img src="game1.jpg" alt="Game 1">
+        </div>
+        <div class="arrow right" onclick="nextGame()">&#10095;</div>
     </div>
+
+    <script>
+        const games = [
+            { src: "https://loser.co.is.goated.df.cissp.or.id/semag/papasbakeria/papasbakeria.png", alt: "Papas Bakeria", link: "bakeria.html" },
+            { src: "https://loser.co.is.goated.df.cissp.or.id/semag/papasburgeria/images.jpeg", alt: "Papas Burgeria", link: "burgeria.html" },
+            { src: "https://loser.co.is.goated.df.cissp.or.id/semag/papascheeseria/papascheeseria.png", alt: "Papas Cheeseria", link: "cheeseria.html" },
+            { src: "https://loser.co.is.goated.df.cissp.or.id/semag/papasdonuteria/papasdonuteria.png", alt: "Papas Donuteria", link: "donuteria.html" },
+            { src: "https://loser.co.is.goated.df.cissp.or.id/semag/papasfreezeria/images.jpeg", alt: "Papas Freezeria", link: "freezeria.html" },
+            { src: "https://loser.co.is.goated.df.cissp.or.id/semag/papaspancakeria/papaspancakeria.png", alt: "Papas Pancakeria", link: "pancakeria.html" },
+            { src: "https://loser.co.is.goated.df.cissp.or.id/semag/papaspastaria/papaspastaria.png", alt: "Papas Pastaria", link: "pastaria.html" },
+            { src: "https://loser.co.is.goated.df.cissp.or.id/semag/papaspizzeria/images.jpeg", alt: "Papas Pizzeria", link: "pizzeria.html" },
+            { src: "https://loser.co.is.goated.df.cissp.or.id/semag/papasscooperia/papasscooperia.png", alt: "Papas Scooperia", link: "scooperia.html" },
+            { src: "https://loser.co.is.goated.df.cissp.or.id/semag/papassushiria/papassushiria.png", alt: "Papas Sushiria", link: "sushiria.html" },
+            { src: "https://loser.co.is.goated.df.cissp.or.id/semag/papastacomia/papastacomia.png", alt: "Papas Tacomia", link: "tacomia.html" },
+            { src: "https://loser.co.is.goated.df.cissp.or.id/semag/papaswingeria/papaswingeria.png", alt: "Papas Wingeria", link: "wingeria.html" }
+        ];
+
+        let currentGame = 0;
+
+        function showGame(index) {
+            const gameSquare = document.getElementById("gameSquare");
+            const img = gameSquare.querySelector("img");
+            img.src = games[index].src;
+            img.alt = games[index].alt;
+            gameSquare.dataset.link = games[index].link;
+        }
+
+        function prevGame() {
+            currentGame = (currentGame - 1 + games.length) % games.length;
+            showGame(currentGame);
+        }
+
+        function nextGame() {
+            currentGame = (currentGame + 1) % games.length;
+            showGame(currentGame);
+        }
+
+        function goToGame() {
+            const gameSquare = document.getElementById("gameSquare");
+            const link = gameSquare.dataset.link;
+            window.location.href = link;
+        }
+
+        // Initialize the first game
+        showGame(currentGame);
+    </script>
 </body>
 </html>
+
